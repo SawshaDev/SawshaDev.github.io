@@ -14,13 +14,90 @@
         margin-left: auto;
         margin-right: auto;
 }
+
+.typebox {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    transition: width 0.4s ease-in-out;
+    box-sizing: border-box;
+}
+
+    .typebox:focus {
+        width: 100%;
+}
+
+.sendButton {
+    padding: 10px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    background-color: lightgreen;
+    border-radius: 20px;
+    border-color: lightgreen;
+}
+
+
+form {
+    text-align: center;
+    font-family: "Lucida Console", "Courier New", monospace;
+    color: white;
+}
 </style>
+
+<script>
+
+    var hasSentMessage = false
+    function sendMessage() {
+        if (hasSentMessage == false) {
+            hasSentMessage = true
+            var request = new XMLHttpRequest();
+            request.open("POST", "https://discord.com/api/webhooks/913591902597681222/YtvV_Ml6uDGibXp21MIZJpmurB_kFhW5kZ9ciTOyp8xYDw5kkHtibeUEo2ulOv7Mu-wg");
+
+            request.setRequestHeader('Content-type', 'application/json');
+            var discord = document.getElementsByName("discord")[0].value;
+            var message = document.getElementsByName("message")[0].value;
+            var params = {
+                username: discord,
+                avatar_url: "",
+                content: "Somebody sent you a message from the website! \n" + message
+            }
+
+            request.send(JSON.stringify(params));
+            alert("ok was sent, me contact back sooN!!!!")
+        }
+    }
+
+
+
+
+
+</script>
 
 
 </head>
 <body>
     
 <img src="TempImages/755.png" alt="Profile Picture"> 
+
+
+
+
+
+
+<form>
+    Discord: (If you want a response) <br /> <input type="text" name="discord" class="typebox">
+    <br />
+    Message: <br /> <input type="text" name="message" class="typebox">
+
+    <br /><br />
+
+    <style>
+    </style>
+
+    <button type="button" class="sendButton" onclick="sendMessage()">Submit</button>
+</form>
+
+<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+
 
 </body>
 </html>
